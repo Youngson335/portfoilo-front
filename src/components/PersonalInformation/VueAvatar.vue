@@ -1,5 +1,11 @@
 <template>
-  <div class="vue-avatar shadow-block">
+  <div
+    class="vue-avatar shadow-block"
+    v-animation="{
+      delay: 0.1,
+      selector: '.vue-avatar__container',
+    }"
+  >
     <div class="vue-avatar__container">
       <img :src="avatar" alt="avatar" />
     </div>

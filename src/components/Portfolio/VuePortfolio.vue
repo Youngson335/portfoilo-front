@@ -1,9 +1,4 @@
 <template>
-  <div class="vue-portfolio">
-    <p>портфолио</p>
-  </div>
+  <div class="vue-portfolio"></div>
 </template>
-<script>
-export default {};
-</script>
-<style lang=""></style>
+<script lang="ts" setup></script>
