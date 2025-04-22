@@ -42,6 +42,7 @@ const stack = [
   "sql",
   "vue-facing-decorator",
   "lodash",
+  "blade-templates",
 ];
 </script>
 <style lang="scss">
