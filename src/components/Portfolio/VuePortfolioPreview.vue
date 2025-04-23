@@ -55,6 +55,7 @@ const onImageError = () => {
   cursor: pointer;
   transition: transform 0.3s ease;
   background-color: #fff;
+  min-width: 310px;
 
   &:hover {
     transform: scale(1.03);
