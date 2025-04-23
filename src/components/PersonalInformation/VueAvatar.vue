@@ -17,6 +17,9 @@ import avatar from "@/assets/avatar.jpg";
 <style lang="scss">
 .vue-avatar {
   max-width: 400px;
+  @media (max-width: 555px) {
+    max-width: 100%;
+  }
   &__container {
     border-radius: var(--radius);
     overflow: hidden;

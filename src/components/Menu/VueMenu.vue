@@ -7,7 +7,7 @@
           :is-active="props.contentName === ContentName.BIO"
         />
       </div>
-      <div class="flex-center p-20 w-50">
+      <div class="flex-center p-20 w-50 component-logo">
         <vue-logo :logo="'black'" />
       </div>
       <div class="p-20">
@@ -40,5 +40,10 @@ const onChange = (contentName: ContentName) => {
 <style lang="scss">
 .vue-menu {
   border-bottom: 1px solid var(--light-gray);
+}
+.component-logo {
+  @media (max-width: 640px) {
+    display: none;
+  }
 }
 </style>

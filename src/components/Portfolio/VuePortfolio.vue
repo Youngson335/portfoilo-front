@@ -1,5 +1,11 @@
 <template>
   <div class="vue-portfolio">
+    <div class="mb-20 flex-center">
+      <vue-button :color="'green'" @click="onOpenReviews"
+        >Смотреть отзывы</vue-button
+      >
+    </div>
+
     <div
       class="flex vue-portfolio-preview__container"
       v-animation="{
@@ -20,7 +26,10 @@
       </div>
     </div>
 
-    <vue-modal v-model:is-open="isModalOpen" :is-loading="isLoadingImage">
+    <vue-modal
+      v-model:is-open="isModalPortfolioOpen"
+      :is-loading="isLoadingImage"
+    >
       <div
         class="work-info"
         v-animation="{
@@ -68,6 +77,22 @@
         <vue-carousel :images="selected_work!.images" />
       </div>
     </vue-modal>
+
+    <vue-modal v-model:is-open="isModalReviewOpen">
+      <div
+        v-animation="{
+          delay: 0.2,
+          selector: '.review-item',
+        }"
+      >
+        <vue-review-card
+          v-for="review of reviews"
+          :key="review.id"
+          :review="review"
+          class="review-item mb-20"
+        />
+      </div>
+    </vue-modal>
   </div>
 </template>
 <script lang="ts" setup>
@@ -80,26 +105,39 @@ import VueCarousel from "./VueCarousel.vue";
 import loadedWorkPreview from "@/methods/loadedWorkPreview";
 import { NotificationApi } from "@/plugins/notification";
 import VueReviewCard from "../Cards/VueReviewCard.vue";
+import VueButton from "../Buttons/VueButton.vue";
+import { useReviewStore } from "@/store/review";
+import { Review } from "@/store/review";
 
-const store = usePortfolioStore();
+const portfolioStore = usePortfolioStore();
+const reviewStore = useReviewStore();
 
 const notification = inject<NotificationApi>("notification");
-const isModalOpen = ref(false);
+const isModalPortfolioOpen = ref(false);
+const isModalReviewOpen = ref(false);
 const isLoadingImage = ref(false);
 
 const works = computed((): WorkPreview[] => {
-  return store.works;
+  return portfolioStore.works;
+});
+
+const reviews = computed((): Review[] => {
+  return reviewStore.reviews;
 });
 
 const selected_work = ref<null | CompleteWork>(null);
 
+const onOpenReviews = () => {
+  isModalReviewOpen.value = true;
+};
+
 const onChangeWork = async (work_id: number) => {
-  isModalOpen.value = true;
+  isModalPortfolioOpen.value = true;
   isLoadingImage.value = true;
 
   console.log("work_id", work_id);
 
-  const work = store.findWorkById(work_id);
+  const work = portfolioStore.findWorkById(work_id);
   if (work) {
     const response = await loadedWorkPreview(work.images);
     if (response) {
@@ -138,8 +176,6 @@ a {
     & h2 {
       font-weight: 300;
     }
-  }
-  &__description {
   }
   &-links {
     & span {

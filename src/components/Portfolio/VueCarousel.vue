@@ -290,9 +290,10 @@ onBeforeUnmount(() => {
   z-index: 2;
   background: var(--white);
   padding: 20px;
-  max-width: 50%;
+  max-width: 100%;
   margin: 0 auto;
   border-radius: var(--radius);
+  flex-wrap: wrap;
 }
 
 .indicator {

@@ -125,4 +125,10 @@ const onCopyText = async (text: string, type: TypeCopyText) => {
     transition: all 0.3s ease;
   }
 }
+.vue-user-description {
+  @media (max-width: 755px) {
+    display: flex;
+    flex-direction: column;
+  }
+}
 </style>
