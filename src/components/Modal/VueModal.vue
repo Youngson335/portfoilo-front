@@ -3,7 +3,7 @@
     <div v-if="isOpen" class="modal-overlay" @click="closeModal">
       <div class="vue-modal" @click.stop>
         <button class="close-btn" @click="closeModal">&times;</button>
-        <div class="modal-content">
+        <div class="modal-content" v-loading="props.isLoading">
           <slot></slot>
         </div>
       </div>
@@ -18,6 +18,9 @@ const props = defineProps({
   isOpen: {
     type: Boolean,
     required: true,
+  },
+  isLoading: {
+    type: Boolean,
   },
 });
 
