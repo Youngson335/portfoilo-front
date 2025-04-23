@@ -168,6 +168,8 @@ a {
       gap: 3%;
       justify-content: center;
       align-items: self-start;
+      max-width: 1000px;
+      margin: 0 auto;
     }
   }
 }
