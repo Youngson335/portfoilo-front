@@ -6,14 +6,19 @@
       selector: '.vue-tech-stack__item',
     }"
   >
-    <div
-      class="vue-tech-stack__item"
-      v-for="(stack, index) of stack"
-      :key="index"
-    >
-      <p :class="{ 'vue-tech-stack__item--active': index % 2 === 0 }">
-        {{ stack }} |
-      </p>
+    <div class="vue-tech-stack__title">
+      <p>Технический стэк:</p>
+    </div>
+    <div class="vue-tech-stack__items">
+      <div
+        class="vue-tech-stack__item"
+        v-for="(stack, index) of stack"
+        :key="index"
+      >
+        <p :class="{ 'vue-tech-stack__item--active': index % 2 === 0 }">
+          {{ stack }} |
+        </p>
+      </div>
     </div>
   </div>
 </template>
@@ -47,12 +52,24 @@ const stack = [
 </script>
 <style lang="scss">
 .vue-tech-stack {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: start;
-  align-items: start;
   width: 100%;
   max-width: 400px;
+  @media (max-width: 555px) {
+    margin-bottom: 20px;
+    max-width: 100%;
+  }
+  &__title {
+    padding: 5px;
+    & p {
+      font-weight: 300;
+    }
+  }
+  &__items {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: start;
+    align-items: start;
+  }
   &__item {
     padding: 5px;
     &--active {

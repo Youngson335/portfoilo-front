@@ -4,7 +4,7 @@
       <vue-avatar class="component-avatar" />
       <vue-tech-stack />
     </div>
-    <div class="w-70">
+    <div class="w-70 description-container">
       <vue-user-description class="mb-20" />
       <vue-working-description />
     </div>
@@ -21,8 +21,18 @@ import VueTechStack from "./VueTechStack.vue";
   gap: 3%;
   justify-content: center;
   align-items: self-start;
+  @media (max-width: 555px) {
+    flex-direction: column;
+    gap: 0%;
+    align-items: center;
+  }
 }
 .component-avatar {
   margin-bottom: 6%;
+}
+.description-container {
+  @media (max-width: 555px) {
+    width: 100%;
+  }
 }
 </style>

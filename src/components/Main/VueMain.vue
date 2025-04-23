@@ -22,3 +22,9 @@ const props = withDefaults(
   }
 );
 </script>
+
+<style lang="scss">
+.vue-main {
+  min-height: 90vh;
+}
+</style>

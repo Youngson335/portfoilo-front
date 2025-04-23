@@ -17,7 +17,7 @@
     </div>
 
     <p class="vue-portfolio-preview__title">{{ props.work.title }}</p>
-    <vue-button @click="onClick">Подробнее...</vue-button>
+    <vue-button :color="'red'" @click="onClick">Подробнее...</vue-button>
   </div>
 </template>
 

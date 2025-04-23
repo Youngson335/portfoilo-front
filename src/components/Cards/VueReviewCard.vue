@@ -1,44 +1,92 @@
 <template>
   <div class="vue-review-card shadow-block">
-    <div class="review-header">
-      <div class="avatar">DJ</div>
-      <div class="author-info">
-        <div class="author-name">{{ author }}</div>
-        <div class="author-role">фриланс биржа</div>
+    <div class="vue-review-card__content">
+      <div class="review-header">
+        <div class="avatar">{{ props.review.initials }}</div>
+        <div class="author-info">
+          <div class="author-name">{{ props.review.author }}</div>
+          <div class="author-role">фриланс биржа</div>
+        </div>
+      </div>
+
+      <div class="review-rating">
+        <span v-for="star in 5" :key="star">
+          <span v-if="star <= props.review.rating" class="star filled">★</span>
+          <span v-else class="star">★</span>
+        </span>
+      </div>
+
+      <p class="review-description">
+        {{ props.review.description }}
+      </p>
+
+      <div
+        class="read-more"
+        @click="onShowReviewImage"
+        v-if="!isShowReviewImage"
+      >
+        подробнее
       </div>
     </div>
 
-    <div class="review-rating">
-      <span v-for="star in 5" :key="star">
-        <span v-if="star <= props.rating" class="star filled">★</span>
-        <span v-else class="star">★</span>
-      </span>
+    <div
+      class="vue-review-card__preview"
+      v-if="isShowReviewImage"
+      v-animation="{
+        delay: 0.2,
+        selector: '.review-image',
+      }"
+    >
+      <div class="review-image">
+        <img :src="props.review.img" alt="" />
+      </div>
     </div>
-
-    <p class="review-description">
-      {{ props.description }}
-    </p>
-
-    <div class="read-more">подробнее</div>
   </div>
 </template>
 
 <script setup lang="ts">
-import { defineProps } from "vue";
+import { defineProps, ref } from "vue";
+import { Review } from "@/store/review";
+
 const props = defineProps<{
-  rating: number;
-  description: string;
+  review: Review;
 }>();
 
-const author = "Donald Jackman";
+const isShowReviewImage = ref(false);
+
+const onShowReviewImage = () => {
+  isShowReviewImage.value = true;
+};
 </script>
 
-<style scoped>
+<style scoped lang="scss">
 .vue-review-card {
-  max-width: 400px;
-  border-radius: 8px;
-  background-color: var(--white);
-  padding: 24px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  @media (max-width: 965px) {
+    flex-direction: column;
+    align-items: start;
+  }
+  &__content {
+    max-width: 400px;
+    border-radius: 8px;
+    background-color: var(--white);
+    padding: 24px;
+    width: 45%;
+    @media (max-width: 965px) {
+      width: 100%;
+    }
+  }
+  &__preview {
+    max-width: 600px;
+    @media (max-width: 965px) {
+      max-width: 100%;
+    }
+    & img {
+      width: 100%;
+    }
+  }
 }
 
 .review-header {
@@ -53,7 +101,7 @@ const author = "Donald Jackman";
   background-color: var(--green);
   color: white;
   font-size: 18px;
-  font-weight: 600;
+  font-weight: 300;
   border-radius: 50%;
   display: flex;
   align-items: center;

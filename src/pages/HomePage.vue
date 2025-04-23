@@ -2,6 +2,7 @@
   <div class="home-page">
     <vue-header @change="onSelectedContentType" :content-name="content_name" />
     <vue-main :content-name="content_name" />
+    <vue-footer />
   </div>
 </template>
 <script lang="ts">
@@ -13,6 +14,7 @@ export enum ContentName {
 <script lang="ts" setup>
 import VueHeader from "@/components/Header/VueHeader.vue";
 import VueMain from "@/components/Main/VueMain.vue";
+import VueFooter from "@/components/Footer/VueFooter.vue";
 import { ref } from "vue";
 
 const content_name = ref<ContentName>(ContentName.BIO);
