@@ -1,41 +1,47 @@
 <template>
   <div class="image-carousel">
     <div class="carousel-wrapper">
-      <button
-        class="arrow left-arrow"
-        @click="prevImage"
-        :disabled="currentIndex === 0"
-      >
-        &larr;
-      </button>
-
       <div
         class="image-container"
-        ref="imageContainer"
-        @touchstart="handleTouchStart"
-        @touchmove="handleTouchMove"
+        ref="container"
+        :style="{ height: containerHeight + 'px' }"
       >
-        <transition :name="transitionName" mode="out-in">
-          <img
-            :key="currentIndex"
-            :src="images[currentIndex].img"
-            :alt="`Image ${currentIndex + 1}`"
-            class="carousel-image"
-            @click="emit('image-click', currentIndex)"
-          />
-        </transition>
+        <div
+          class="image-wrapper"
+          ref="imageWrapper"
+          @touchstart="handleTouchStart"
+          @touchmove="handleTouchMove"
+        >
+          <transition :name="transitionName" mode="out-in">
+            <img
+              :key="currentIndex"
+              :src="images[currentIndex].img"
+              :alt="`Image ${currentIndex + 1}`"
+              class="carousel-image"
+              @load="handleImageLoad"
+              @click="emit('image-click', currentIndex)"
+            />
+          </transition>
+        </div>
       </div>
 
-      <button
-        class="arrow right-arrow"
-        @click="nextImage"
-        :disabled="currentIndex === images.length - 1"
-      >
-        &rarr;
-      </button>
+      <div class="arrows" v-if="!isMobile && images.length > 1">
+        <vue-arrow-button
+          @click="prevImage"
+          :is-disabled="currentIndex === 0"
+          :rotation="'left'"
+          :height="containerHeight"
+        />
+        <vue-arrow-button
+          @click="nextImage"
+          :is-disabled="currentIndex === images.length - 1"
+          :rotation="'right'"
+          :height="containerHeight"
+        />
+      </div>
     </div>
 
-    <div v-if="showIndicators" class="indicators">
+    <div v-if="showIndicators && images.length > 1" class="indicators">
       <span
         v-for="(_, index) in images"
         :key="index"
@@ -57,14 +63,17 @@ import {
   onBeforeUnmount,
 } from "vue";
 import { Images } from "@/store/portfolio";
+import VueArrowButton from "../Buttons/VueArrowButton.vue";
 
 interface Props {
   images: Images[];
   showIndicators?: boolean;
+  initialHeight?: number;
 }
 
 const props = withDefaults(defineProps<Props>(), {
   showIndicators: true,
+  initialHeight: 400,
 });
 
 const emit = defineEmits<{
@@ -75,32 +84,45 @@ const currentIndex = ref(0);
 const transitionDirection = ref<"next" | "prev">("next");
 const touchStartX = ref(0);
 const touchEndX = ref(0);
-const imageContainer = ref<HTMLElement | null>(null);
+const container = ref<HTMLElement | null>(null);
+const imageWrapper = ref<HTMLElement | null>(null);
+const containerHeight = ref(props.initialHeight);
+const isMobile = ref(window.innerWidth < 700);
+const imageLoaded = ref(false);
+const isTransitioning = ref(false);
 
 const transitionName = computed(() => {
-  return `slide-${transitionDirection.value}`;
+  return imageLoaded.value ? `slide-${transitionDirection.value}` : "";
 });
 
 const nextImage = () => {
-  if (currentIndex.value < props.images.length - 1) {
-    transitionDirection.value = "next";
-    currentIndex.value++;
-  }
+  if (isTransitioning.value || currentIndex.value >= props.images.length - 1)
+    return;
+
+  isTransitioning.value = true;
+  imageLoaded.value = false;
+  transitionDirection.value = "next";
+  currentIndex.value++;
 };
 
 const prevImage = () => {
-  if (currentIndex.value > 0) {
-    transitionDirection.value = "prev";
-    currentIndex.value--;
-  }
+  if (isTransitioning.value || currentIndex.value <= 0) return;
+
+  isTransitioning.value = true;
+  imageLoaded.value = false;
+  transitionDirection.value = "prev";
+  currentIndex.value--;
 };
 
 const goToImage = (index: number) => {
+  if (isTransitioning.value || index === currentIndex.value) return;
+
+  isTransitioning.value = true;
+  imageLoaded.value = false;
   transitionDirection.value = index > currentIndex.value ? "next" : "prev";
   currentIndex.value = index;
 };
 
-// Touch events for mobile swipe
 const handleTouchStart = (e: TouchEvent) => {
   touchStartX.value = e.touches[0].clientX;
 };
@@ -108,6 +130,11 @@ const handleTouchStart = (e: TouchEvent) => {
 const handleTouchMove = (e: TouchEvent) => {
   if (!touchStartX.value) return;
   touchEndX.value = e.touches[0].clientX;
+
+  // Prevent scrolling when swiping horizontally
+  if (Math.abs(touchStartX.value - touchEndX.value) > 10) {
+    e.preventDefault();
+  }
 };
 
 const handleTouchEnd = () => {
@@ -115,33 +142,81 @@ const handleTouchEnd = () => {
 
   const diff = touchStartX.value - touchEndX.value;
   if (diff > 50) {
-    nextImage(); // Swipe left
+    nextImage();
   } else if (diff < -50) {
-    prevImage(); // Swipe right
+    prevImage();
   }
 
   touchStartX.value = 0;
   touchEndX.value = 0;
 };
 
-// Handle window resize for responsive adjustments
-const isMobile = ref(window.innerWidth < 768);
+const handleImageLoad = () => {
+  imageLoaded.value = true;
+  updateContainerHeight();
+  setTimeout(() => {
+    isTransitioning.value = false;
+  }, 300);
+};
+
+const updateContainerHeight = () => {
+  if (container.value && imageWrapper.value) {
+    const img = imageWrapper.value.querySelector(".carousel-image");
+    if (img) {
+      requestAnimationFrame(() => {
+        containerHeight.value = img.clientHeight;
+      });
+    }
+  }
+};
 
 const handleResize = () => {
-  isMobile.value = window.innerWidth < 768;
+  isMobile.value = window.innerWidth < 700;
+  if (!isMobile.value) {
+    updateContainerHeight();
+  }
+};
+
+const handleWheel = (e: WheelEvent) => {
+  if (isMobile.value || !container.value || isTransitioning.value) return;
+
+  e.preventDefault();
+  if (e.deltaX > 20) {
+    nextImage();
+  } else if (e.deltaX < -20) {
+    prevImage();
+  }
 };
 
 onMounted(() => {
   window.addEventListener("resize", handleResize);
-  if (imageContainer.value) {
-    imageContainer.value.addEventListener("touchend", handleTouchEnd);
+  if (container.value) {
+    container.value.addEventListener("touchend", handleTouchEnd);
+    container.value.addEventListener("wheel", handleWheel, { passive: false });
+
+    containerHeight.value = props.initialHeight;
+
+    let resizeObserver: ResizeObserver;
+    if (typeof ResizeObserver !== "undefined") {
+      resizeObserver = new ResizeObserver(() => {
+        updateContainerHeight();
+      });
+      resizeObserver.observe(container.value);
+    }
+
+    onBeforeUnmount(() => {
+      if (resizeObserver) {
+        resizeObserver.disconnect();
+      }
+    });
   }
 });
 
 onBeforeUnmount(() => {
   window.removeEventListener("resize", handleResize);
-  if (imageContainer.value) {
-    imageContainer.value.removeEventListener("touchend", handleTouchEnd);
+  if (container.value) {
+    container.value.removeEventListener("touchend", handleTouchEnd);
+    container.value.removeEventListener("wheel", handleWheel);
   }
 });
 </script>
@@ -153,18 +228,14 @@ onBeforeUnmount(() => {
   align-items: center;
   gap: 20px;
   position: relative;
-  max-width: 100%;
-  margin: 0 auto;
   width: 100%;
 }
 
 .carousel-wrapper {
   display: flex;
-  align-items: center;
   justify-content: center;
-  gap: 20px;
-  width: 100%;
   position: relative;
+  width: 100%;
 }
 
 .image-container {
@@ -172,59 +243,54 @@ onBeforeUnmount(() => {
   max-width: 800px;
   overflow: hidden;
   position: relative;
-  min-height: 500px;
-  touch-action: pan-y; /* Enable vertical scroll */
+  transition: height 0.3s ease;
+  max-height: 400px;
+}
+
+.image-wrapper {
+  width: 100%;
+  height: 100%;
+  position: relative;
 }
 
 .carousel-image {
   width: 100%;
   height: auto;
-  max-height: 70vh;
   display: block;
   border-radius: 8px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   user-select: none;
   -webkit-user-drag: none;
+  object-fit: cover;
 }
 
-.arrow {
-  background: rgba(255, 255, 255, 0.7);
-  border: none;
-  border-radius: 50%;
-  width: 40px;
-  height: 40px;
-  font-size: 20px;
-  cursor: pointer;
+.arrows {
+  position: absolute;
   display: flex;
+  justify-content: space-between;
   align-items: center;
-  justify-content: center;
-  transition: all 0.3s ease;
+  width: 100%;
+  max-width: 900px;
+  height: 0;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
   z-index: 2;
-  position: relative;
 }
 
-.arrow:hover:not(:disabled) {
-  background: rgba(255, 255, 255, 0.9);
-  transform: scale(1.1);
-}
-
-.arrow:disabled {
-  opacity: 0.3;
-  cursor: not-allowed;
+.arrows > * {
+  pointer-events: auto;
 }
 
 .indicators {
-  position: relative;
-  bottom: 0;
-  left: 0;
-  right: 0;
   display: flex;
   justify-content: center;
   gap: 8px;
   z-index: 2;
   background: var(--white);
   padding: 20px;
-  max-width: 30%;
+  max-width: 50%;
   margin: 0 auto;
   border-radius: var(--radius);
 }
@@ -243,81 +309,47 @@ onBeforeUnmount(() => {
   transform: scale(1.3);
 }
 
-.indicator:hover {
-  background-color: rgba(255, 255, 255, 0.7);
-}
-
 /* Анимации перехода */
 .slide-next-enter-active,
 .slide-next-leave-active,
 .slide-prev-enter-active,
 .slide-prev-leave-active {
   transition: all 0.3s ease;
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
 }
 
 .slide-next-enter-from {
   transform: translateX(100%);
   opacity: 0;
+  position: absolute;
 }
 
 .slide-next-leave-to {
   transform: translateX(-100%);
   opacity: 0;
+  position: absolute;
 }
 
 .slide-prev-enter-from {
   transform: translateX(-100%);
   opacity: 0;
+  position: absolute;
 }
 
 .slide-prev-leave-to {
   transform: translateX(100%);
   opacity: 0;
+  position: absolute;
 }
 
-/* Mobile styles */
-@media (max-width: 768px) {
-  .carousel-wrapper {
-    flex-direction: column;
-    align-items: center;
-  }
-
-  .arrow {
-    position: static;
-    margin: 10px 0;
-  }
-
-  .image-container {
-    min-height: 300px;
-    order: 1;
-  }
-
-  .left-arrow {
-    order: 2;
-    margin-right: 0;
-  }
-
-  .right-arrow {
-    order: 3;
-    margin-left: 0;
-  }
-
-  .indicators {
-    max-width: 80%;
-    padding: 15px;
-    order: 4;
-  }
-}
-
-/* Enable scrolling on mobile */
-@media (hover: none) {
+@media (max-width: 700px) {
   .image-container {
     overflow-y: auto;
     -webkit-overflow-scrolling: touch;
+    height: auto !important;
+  }
+
+  .carousel-image {
+    max-height: none;
   }
 }
 </style>

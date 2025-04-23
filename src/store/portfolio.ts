@@ -4,6 +4,7 @@ export interface WorkPreview {
   id: number;
   img: string;
   title: string;
+  countImage: number;
 }
 
 export interface Images {
@@ -32,86 +33,103 @@ const usePortfolioStore = defineStore("portfolio", {
         id: 1,
         img: require("../assets/portfolio/work1/1.png"),
         title: "Сервис по вывозу мусора",
+        countImage: 9,
       },
       {
         id: 2,
         img: require("../assets/portfolio/work2/1.png"),
         title: "Тестовое задание для компании",
+        countImage: 5,
       },
       {
         id: 3,
         img: require("../assets/portfolio/work3/1.png"),
         title: "Верстка + анимация поезда",
+        countImage: 2,
       },
       {
         id: 4,
         img: require("../assets/portfolio/work4/1.png"),
         title: "Рекламный лендинг телеграм канала",
+        countImage: 4,
       },
       {
         id: 5,
         img: require("../assets/portfolio/work5/1.png"),
         title: "Телеграмм игра",
+        countImage: 7,
       },
       {
         id: 6,
         img: require("../assets/portfolio/work6/1.png"),
         title: "Интернет-магазин мебели",
+        countImage: 7,
       },
       {
         id: 7,
         img: require("../assets/portfolio/work7/1.png"),
         title: "Интернет-магазин кроссовок",
+        countImage: 5,
       },
       {
         id: 8,
         img: require("../assets/portfolio/work8/1.png"),
         title: "Сервис для аренды жилья",
+        countImage: 3,
       },
       {
         id: 9,
         img: require("../assets/portfolio/work9/1.png"),
         title: "Рекламный лендинг приложения",
+        countImage: 7,
       },
       {
         id: 10,
         img: require("../assets/portfolio/work10/1.png"),
         title: "Админ-панель для телеграмм приложения",
+        countImage: 6,
       },
       {
         id: 11,
         img: require("../assets/portfolio/work11/1.png"),
         title: "Рекламный лендинг заявок грузчиков",
+        countImage: 4,
       },
       {
         id: 12,
         img: require("../assets/portfolio/work12/1.png"),
         title: "Сервис записи в барбершопы Москвы",
+        countImage: 10,
       },
       {
         id: 13,
         img: require("../assets/portfolio/work13/1.png"),
         title: "Регистрация сервиса",
+        countImage: 5,
       },
       {
         id: 14,
         img: require("../assets/portfolio/work14/1.png"),
         title: "Благотворительный сайт",
+        countImage: 16,
       },
       {
         id: 15,
         img: require("../assets/portfolio/work15/1.png"),
         title: "Телеграмм игра",
+        countImage: 8,
       },
       {
         id: 16,
         img: require("../assets/portfolio/work16/1.png"),
         title: "Тестовое задание для компании",
+        countImage: 5,
       },
       {
         id: 17,
         img: require("../assets/portfolio/work17/1.png"),
         title: "Тестовое задание для компании",
+        countImage: 5,
       },
     ],
 

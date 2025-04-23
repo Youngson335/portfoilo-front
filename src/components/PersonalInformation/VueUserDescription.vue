@@ -117,7 +117,7 @@ const onCopyText = async (text: string, type: TypeCopyText) => {
   }
 }
 .copy-text {
-  color: var(--red);
+  color: var(--green);
   cursor: pointer;
   transition: all 0.3s ease;
   &:active {

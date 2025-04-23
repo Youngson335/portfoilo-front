@@ -41,6 +41,18 @@ export const notification = {
       closable: options?.closable ?? true,
     });
   },
+  error(text: string, options?: NotificationOptions) {
+    if (!notificationInstance) {
+      console.error("Notification plugin not initialized");
+      return;
+    }
+    notificationInstance.addNotification({
+      type: "error",
+      text,
+      duration: options?.duration ?? 4000,
+      closable: options?.closable ?? true,
+    });
+  },
   // Аналогично для error, info, warning...
 };
 

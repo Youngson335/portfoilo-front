@@ -78,3 +78,7 @@ body {
 .w-50 {
     width: 50%;
 }
+
+.el-loading-mask {
+    border-radius: var(--radius);
+}
