@@ -131,6 +131,12 @@ const usePortfolioStore = defineStore("portfolio", {
         title: "Тестовое задание для компании",
         countImage: 5,
       },
+      {
+        id: 18,
+        img: require("../assets/portfolio/work18/1.png"),
+        title: "Микрофронтенд для тур-агенства",
+        countImage: 4,
+      },
     ],
 
     completeWorks: [
@@ -724,6 +730,31 @@ const usePortfolioStore = defineStore("portfolio", {
         description: "Разработка тестового задания для компании",
         link: "https://alef-build.vercel.app/",
         gitHub: "https://github.com/Youngson335/test-alef",
+      },
+      {
+        id: 18,
+        images: [
+          {
+            id: 1,
+            img: require("../assets/portfolio/work18/1.png"),
+          },
+          {
+            id: 2,
+            img: require("../assets/portfolio/work18/2.png"),
+          },
+          {
+            id: 3,
+            img: require("../assets/portfolio/work18/3.png"),
+          },
+          {
+            id: 4,
+            img: require("../assets/portfolio/work18/4.png"),
+          },
+        ],
+        title: "Разработка части сервиса тур-агенства",
+        description: "Разработал микрофронтенд для тур-агенства",
+        link: null,
+        gitHub: null,
       },
     ],
   }),
