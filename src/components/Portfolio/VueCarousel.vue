@@ -14,6 +14,7 @@
         >
           <transition :name="transitionName" mode="out-in">
             <img
+              loading="lazy"
               :key="currentIndex"
               :src="images[currentIndex].img"
               :alt="`Image ${currentIndex + 1}`"
