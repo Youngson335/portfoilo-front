@@ -5,6 +5,7 @@
         Загрузка...
       </div>
       <img
+        loading="eager"
         v-show="!isLoadingImage"
         :src="props.work.img"
         alt="preview"

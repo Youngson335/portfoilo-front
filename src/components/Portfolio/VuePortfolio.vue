@@ -1,9 +1,9 @@
 <template>
   <div class="vue-portfolio">
     <div class="mb-20 flex-center">
-      <vue-button :color="'green'" @click="onOpenReviews"
-        >Смотреть отзывы</vue-button
-      >
+      <vue-button :color="'green'" @click="onOpenReviews">
+        Смотреть отзывы
+      </vue-button>
     </div>
 
     <div
@@ -100,7 +100,7 @@ import usePortfolioStore from "@/store/portfolio";
 import VuePortfolioPreview from "./VuePortfolioPreview.vue";
 import VueModal from "../Modal/VueModal.vue";
 import { WorkPreview, CompleteWork } from "@/store/portfolio";
-import { computed, ref, inject } from "vue";
+import { computed, ref, inject, watch } from "vue";
 import VueCarousel from "./VueCarousel.vue";
 import loadedWorkPreview from "@/methods/loadedWorkPreview";
 import { NotificationApi } from "@/plugins/notification";
@@ -131,11 +131,15 @@ const onOpenReviews = () => {
   isModalReviewOpen.value = true;
 };
 
+watch(isModalPortfolioOpen, (newValue) => {
+  if (newValue === false) {
+    selected_work.value = null;
+  }
+});
+
 const onChangeWork = async (work_id: number) => {
   isModalPortfolioOpen.value = true;
   isLoadingImage.value = true;
-
-  console.log("work_id", work_id);
 
   const work = portfolioStore.findWorkById(work_id);
   if (work) {

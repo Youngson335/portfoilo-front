@@ -473,9 +473,8 @@ const usePortfolioStore = defineStore("portfolio", {
             img: require("../assets/portfolio/work11/4.png"),
           },
         ],
-        title: "Рекламный лендинг заявок грузчиков",
-        description:
-          "Разработка рекламного лендинга для сервиса по найму грузчиков на 'аутсорс' заказы",
+        title: "Сервис записи в барбершопы Москвы",
+        description: "Разработка сервиса записи в барбершопы Москвы на nuxtjs",
         link: null,
         gitHub: null,
       },
