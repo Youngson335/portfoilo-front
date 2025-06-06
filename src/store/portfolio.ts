@@ -137,6 +137,12 @@ const usePortfolioStore = defineStore("portfolio", {
         title: "Микрофронтенд для тур-агенства",
         countImage: 4,
       },
+      {
+        id: 19,
+        img: require("../assets/portfolio/work19/1.png"),
+        title: "DEMO-МАРКЕТ (личный проект)",
+        countImage: 14,
+      },
     ],
 
     completeWorks: [
@@ -754,6 +760,72 @@ const usePortfolioStore = defineStore("portfolio", {
         description: "Разработал микрофронтенд для тур-агенства",
         link: null,
         gitHub: null,
+      },
+      {
+        id: 19,
+        images: [
+          {
+            id: 1,
+            img: require("../assets/portfolio/work19/1.png"),
+          },
+          {
+            id: 2,
+            img: require("../assets/portfolio/work19/2.png"),
+          },
+          {
+            id: 3,
+            img: require("../assets/portfolio/work19/3.png"),
+          },
+          {
+            id: 4,
+            img: require("../assets/portfolio/work19/4.png"),
+          },
+          {
+            id: 5,
+            img: require("../assets/portfolio/work19/5.png"),
+          },
+          {
+            id: 6,
+            img: require("../assets/portfolio/work19/6.png"),
+          },
+          {
+            id: 7,
+            img: require("../assets/portfolio/work19/7.png"),
+          },
+          {
+            id: 8,
+            img: require("../assets/portfolio/work19/8.png"),
+          },
+          {
+            id: 9,
+            img: require("../assets/portfolio/work19/9.png"),
+          },
+          {
+            id: 10,
+            img: require("../assets/portfolio/work19/10.png"),
+          },
+          {
+            id: 11,
+            img: require("../assets/portfolio/work19/11.png"),
+          },
+          {
+            id: 12,
+            img: require("../assets/portfolio/work19/12.png"),
+          },
+          {
+            id: 13,
+            img: require("../assets/portfolio/work19/13.png"),
+          },
+          {
+            id: 14,
+            img: require("../assets/portfolio/work19/14.png"),
+          },
+        ],
+        title: "Разработка demo-маркет (личный проект)",
+        description:
+          "Был разработан в исключительно демонстративных целей для частичной оценки моих навыков",
+        link: "https://demo-market-hazel.vercel.app",
+        gitHub: "https://github.com/Youngson335/market",
       },
     ],
   }),
