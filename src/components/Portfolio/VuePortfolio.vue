@@ -1,6 +1,9 @@
 <template>
   <div class="vue-portfolio">
-    <div class="mb-20 flex-center">
+    <div class="mb-20 flex-center vue-portfolio__header">
+      <div class="vue-portfolio__description">
+        <p>Работы предоставлены в порядке актуальности их создания!</p>
+      </div>
       <vue-button :color="'green'" @click="onOpenReviews">
         Смотреть отзывы
       </vue-button>
@@ -15,7 +18,7 @@
     >
       <div
         class="vue-portfolio-preview__wrapper"
-        v-for="work of works"
+        v-for="work of [...works].sort((a, b) => b.id - a.id)"
         :key="work.id"
       >
         <vue-portfolio-preview
@@ -108,9 +111,14 @@ import VueReviewCard from "../Cards/VueReviewCard.vue";
 import VueButton from "../Buttons/VueButton.vue";
 import { useReviewStore } from "@/store/review";
 import { Review } from "@/store/review";
+import { useRouter, useRoute, LocationQuery } from "vue-router";
 
 const portfolioStore = usePortfolioStore();
 const reviewStore = useReviewStore();
+const router = useRouter();
+const route = useRoute();
+const hasRoute = ref(false);
+const queryId = ref<null | number>(null);
 
 const notification = inject<NotificationApi>("notification");
 const isModalPortfolioOpen = ref(false);
@@ -134,10 +142,18 @@ const onOpenReviews = () => {
 watch(isModalPortfolioOpen, (newValue) => {
   if (newValue === false) {
     selected_work.value = null;
+    router.push({
+      query: {},
+    });
   }
 });
 
 const onChangeWork = async (work_id: number) => {
+  router.push({
+    query: {
+      work_id: work_id,
+    },
+  });
   isModalPortfolioOpen.value = true;
   isLoadingImage.value = true;
 
@@ -154,6 +170,16 @@ const onChangeWork = async (work_id: number) => {
     }
   }
 };
+
+const parseQueryId = (id: number) => {
+  onChangeWork(id);
+};
+
+if (route.query.work_id) {
+  hasRoute.value = true;
+  queryId.value = Number(route.query.work_id);
+  parseQueryId(queryId.value);
+}
 </script>
 <style lang="scss" scoped>
 @mixin links {
@@ -166,6 +192,14 @@ a {
   color: var(--green);
 }
 .vue-portfolio {
+  &__header {
+    flex-direction: column;
+  }
+  &__description {
+    margin-bottom: 15px;
+    color: var(--light-gray);
+    text-align: center;
+  }
   &-preview {
     &__container {
       flex-wrap: wrap;

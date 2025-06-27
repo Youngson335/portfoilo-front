@@ -109,27 +109,27 @@ const usePortfolioStore = defineStore("portfolio", {
       },
       {
         id: 14,
-        img: require("../assets/portfolio/work14/1.png"),
-        title: "Благотворительный сайт",
-        countImage: 16,
-      },
-      {
-        id: 15,
         img: require("../assets/portfolio/work15/1.png"),
         title: "Телеграмм игра",
         countImage: 8,
       },
       {
-        id: 16,
+        id: 15,
         img: require("../assets/portfolio/work16/1.png"),
         title: "Тестовое задание для компании",
         countImage: 5,
       },
       {
-        id: 17,
+        id: 16,
         img: require("../assets/portfolio/work17/1.png"),
         title: "Тестовое задание для компании",
         countImage: 5,
+      },
+      {
+        id: 17,
+        img: require("../assets/portfolio/work14/1.png"),
+        title: "Благотворительный сайт",
+        countImage: 16,
       },
       {
         id: 18,
@@ -142,6 +142,12 @@ const usePortfolioStore = defineStore("portfolio", {
         img: require("../assets/portfolio/work19/1.png"),
         title: "DEMO-МАРКЕТ (личный проект)",
         countImage: 14,
+      },
+      {
+        id: 20,
+        img: require("../assets/portfolio/work20/1.png"),
+        title: "ЧАТ-БОТ tolstov-ai",
+        countImage: 9,
       },
     ],
 
@@ -568,6 +574,105 @@ const usePortfolioStore = defineStore("portfolio", {
         images: [
           {
             id: 1,
+            img: require("../assets/portfolio/work15/1.png"),
+          },
+          {
+            id: 2,
+            img: require("../assets/portfolio/work15/2.png"),
+          },
+          {
+            id: 3,
+            img: require("../assets/portfolio/work15/3.png"),
+          },
+          {
+            id: 4,
+            img: require("../assets/portfolio/work15/4.png"),
+          },
+          {
+            id: 5,
+            img: require("../assets/portfolio/work15/5.png"),
+          },
+          {
+            id: 6,
+            img: require("../assets/portfolio/work15/6.png"),
+          },
+          {
+            id: 7,
+            img: require("../assets/portfolio/work15/7.png"),
+          },
+          {
+            id: 8,
+            img: require("../assets/portfolio/work15/8.png"),
+          },
+        ],
+        title: "Телеграмм игра",
+        description: "Разработка telegram игры-кликер! Личный пет-проект!",
+        link: null,
+        gitHub: null,
+      },
+      {
+        id: 15,
+        images: [
+          {
+            id: 1,
+            img: require("../assets/portfolio/work16/1.png"),
+          },
+          {
+            id: 2,
+            img: require("../assets/portfolio/work16/2.png"),
+          },
+          {
+            id: 3,
+            img: require("../assets/portfolio/work16/3.png"),
+          },
+          {
+            id: 4,
+            img: require("../assets/portfolio/work16/4.png"),
+          },
+          {
+            id: 5,
+            img: require("../assets/portfolio/work16/5.png"),
+          },
+        ],
+        title: "Тестовое задание для компании",
+        description: "Разработка тестового задания для компании",
+        link: "https://test-app-book-build.vercel.app/",
+        gitHub: "https://github.com/Youngson335/test-app-books",
+      },
+      {
+        id: 16,
+        images: [
+          {
+            id: 1,
+            img: require("../assets/portfolio/work17/1.png"),
+          },
+          {
+            id: 2,
+            img: require("../assets/portfolio/work17/2.png"),
+          },
+          {
+            id: 3,
+            img: require("../assets/portfolio/work17/3.png"),
+          },
+          {
+            id: 4,
+            img: require("../assets/portfolio/work17/4.png"),
+          },
+          {
+            id: 5,
+            img: require("../assets/portfolio/work17/5.png"),
+          },
+        ],
+        title: "Тестовое задание для компании",
+        description: "Разработка тестового задания для компании",
+        link: "https://alef-build.vercel.app/",
+        gitHub: "https://github.com/Youngson335/test-alef",
+      },
+      {
+        id: 17,
+        images: [
+          {
+            id: 1,
             img: require("../assets/portfolio/work14/1.png"),
           },
           {
@@ -636,105 +741,6 @@ const usePortfolioStore = defineStore("portfolio", {
           "Разработка сайта, посвященный благотворительному фонду! Разработка велась 2 дня на vuejs",
         link: null,
         gitHub: null,
-      },
-      {
-        id: 15,
-        images: [
-          {
-            id: 1,
-            img: require("../assets/portfolio/work15/1.png"),
-          },
-          {
-            id: 2,
-            img: require("../assets/portfolio/work15/2.png"),
-          },
-          {
-            id: 3,
-            img: require("../assets/portfolio/work15/3.png"),
-          },
-          {
-            id: 4,
-            img: require("../assets/portfolio/work15/4.png"),
-          },
-          {
-            id: 5,
-            img: require("../assets/portfolio/work15/5.png"),
-          },
-          {
-            id: 6,
-            img: require("../assets/portfolio/work15/6.png"),
-          },
-          {
-            id: 7,
-            img: require("../assets/portfolio/work15/7.png"),
-          },
-          {
-            id: 8,
-            img: require("../assets/portfolio/work15/8.png"),
-          },
-        ],
-        title: "Телеграмм игра",
-        description: "Разработка telegram игры-кликер! Личный пет-проект!",
-        link: null,
-        gitHub: null,
-      },
-      {
-        id: 16,
-        images: [
-          {
-            id: 1,
-            img: require("../assets/portfolio/work16/1.png"),
-          },
-          {
-            id: 2,
-            img: require("../assets/portfolio/work16/2.png"),
-          },
-          {
-            id: 3,
-            img: require("../assets/portfolio/work16/3.png"),
-          },
-          {
-            id: 4,
-            img: require("../assets/portfolio/work16/4.png"),
-          },
-          {
-            id: 5,
-            img: require("../assets/portfolio/work16/5.png"),
-          },
-        ],
-        title: "Тестовое задание для компании",
-        description: "Разработка тестового задания для компании",
-        link: "https://test-app-book-build.vercel.app/",
-        gitHub: "https://github.com/Youngson335/test-app-books",
-      },
-      {
-        id: 17,
-        images: [
-          {
-            id: 1,
-            img: require("../assets/portfolio/work17/1.png"),
-          },
-          {
-            id: 2,
-            img: require("../assets/portfolio/work17/2.png"),
-          },
-          {
-            id: 3,
-            img: require("../assets/portfolio/work17/3.png"),
-          },
-          {
-            id: 4,
-            img: require("../assets/portfolio/work17/4.png"),
-          },
-          {
-            id: 5,
-            img: require("../assets/portfolio/work17/5.png"),
-          },
-        ],
-        title: "Тестовое задание для компании",
-        description: "Разработка тестового задания для компании",
-        link: "https://alef-build.vercel.app/",
-        gitHub: "https://github.com/Youngson335/test-alef",
       },
       {
         id: 18,
@@ -826,6 +832,52 @@ const usePortfolioStore = defineStore("portfolio", {
           "Был разработан в исключительно демонстративных целей для частичной оценки моих навыков",
         link: "https://demo-market-hazel.vercel.app",
         gitHub: "https://github.com/Youngson335/market",
+      },
+      {
+        id: 20,
+        images: [
+          {
+            id: 1,
+            img: require("../assets/portfolio/work20/1.png"),
+          },
+          {
+            id: 2,
+            img: require("../assets/portfolio/work20/2.png"),
+          },
+          {
+            id: 3,
+            img: require("../assets/portfolio/work20/3.png"),
+          },
+          {
+            id: 4,
+            img: require("../assets/portfolio/work20/4.png"),
+          },
+          {
+            id: 5,
+            img: require("../assets/portfolio/work20/5.png"),
+          },
+          {
+            id: 6,
+            img: require("../assets/portfolio/work20/6.png"),
+          },
+          {
+            id: 7,
+            img: require("../assets/portfolio/work20/7.png"),
+          },
+          {
+            id: 8,
+            img: require("../assets/portfolio/work20/8.png"),
+          },
+          {
+            id: 9,
+            img: require("../assets/portfolio/work20/9.png"),
+          },
+        ],
+        title: "Разработка чат-бота (tolstov-ai)",
+        description:
+          "Разработка чат-бота под видом искуственного интелекта! Данный чат-бот на каждый ваш ВОПРОС будет давать ответ, который будет мотивировать вас поискать информацию вручную! Данное приложение разрабатывалось полностью с нуля, без готового дизайна!",
+        link: "https://tolstov-ai.vercel.app/",
+        gitHub: "https://github.com/Youngson335/tolstov-gpt",
       },
     ],
   }),
