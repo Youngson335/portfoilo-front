@@ -149,6 +149,12 @@ const usePortfolioStore = defineStore("portfolio", {
         title: "ЧАТ-БОТ tolstov-ai",
         countImage: 9,
       },
+      {
+        id: 21,
+        img: require("../assets/portfolio/work21/1.png"),
+        title: "Лендинг - Реабилитационный центр '12 шаг'",
+        countImage: 5,
+      },
     ],
 
     completeWorks: [
@@ -894,6 +900,35 @@ const usePortfolioStore = defineStore("portfolio", {
           "Разработка чат-бота (использовано api от компании Sber!) Для разработки данного чат бота мне пришлось разработать не просто frontend, но и backend часть! Проект был создан в позновательных целях, но на данный момент им можно полноценно пользоваться! В данном проекте присутствует небольшая регистрация, сбор статистики, сам чат, изменение/сохранение форм, цветовые темы и т.п",
         link: "https://tolstov-ai.vercel.app/",
         gitHub: "https://github.com/Youngson335/tolstov-gpt",
+      },
+      {
+        id: 21,
+        images: [
+          {
+            id: 1,
+            img: require("../assets/portfolio/work21/1.png"),
+          },
+          {
+            id: 2,
+            img: require("../assets/portfolio/work21/2.png"),
+          },
+          {
+            id: 3,
+            img: require("../assets/portfolio/work21/3.png"),
+          },
+          {
+            id: 4,
+            img: require("../assets/portfolio/work21/4.png"),
+          },
+          {
+            id: 5,
+            img: require("../assets/portfolio/work21/5.png"),
+          },
+        ],
+        title: "Лендинг - Реабилитационный центр '12 шаг'",
+        description: "Разработал мини-лендинг для реабилитационного центра",
+        link: null,
+        gitHub: null,
       },
     ],
   }),
