@@ -872,10 +872,26 @@ const usePortfolioStore = defineStore("portfolio", {
             id: 9,
             img: require("../assets/portfolio/work20/9.png"),
           },
+          {
+            id: 10,
+            img: require("../assets/portfolio/work20/10.png"),
+          },
+          {
+            id: 11,
+            img: require("../assets/portfolio/work20/11.png"),
+          },
+          {
+            id: 12,
+            img: require("../assets/portfolio/work20/12.png"),
+          },
+          {
+            id: 13,
+            img: require("../assets/portfolio/work20/13.png"),
+          },
         ],
         title: "Разработка чат-бота (tolstov-ai)",
         description:
-          "Разработка чат-бота под видом искуственного интелекта! Данный чат-бот на каждый ваш ВОПРОС будет давать ответ, который будет мотивировать вас поискать информацию вручную! Данное приложение разрабатывалось полностью с нуля, без готового дизайна!",
+          "Разработка чат-бота (использовано api от компании Sber!) Для разработки данного чат бота мне пришлось разработать не просто frontend, но и backend часть! Проект был создан в позновательных целях, но на данный момент им можно полноценно пользоваться! В данном проекте присутствует небольшая регистрация, сбор статистики, сам чат, изменение/сохранение форм, цветовые темы и т.п",
         link: "https://tolstov-ai.vercel.app/",
         gitHub: "https://github.com/Youngson335/tolstov-gpt",
       },
