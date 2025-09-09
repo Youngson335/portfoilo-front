@@ -155,6 +155,12 @@ const usePortfolioStore = defineStore("portfolio", {
         title: "Лендинг - Реабилитационный центр '12 шаг'",
         countImage: 5,
       },
+      {
+        id: 22,
+        img: require("../assets/portfolio/work22/1.png"),
+        title: "Лендинг для торгов",
+        countImage: 3,
+      },
     ],
 
     completeWorks: [
@@ -929,6 +935,27 @@ const usePortfolioStore = defineStore("portfolio", {
         description: "Разработал мини-лендинг для реабилитационного центра",
         link: null,
         gitHub: null,
+      },
+      {
+        id: 22,
+        images: [
+          {
+            id: 1,
+            img: require("../assets/portfolio/work22/1.png"),
+          },
+          {
+            id: 2,
+            img: require("../assets/portfolio/work22/2.png"),
+          },
+          {
+            id: 3,
+            img: require("../assets/portfolio/work22/3.png"),
+          },
+        ],
+        title: "Лендинг для торгов",
+        description: "Разработал лендинг для торгов (без адаптива!)",
+        link: "https://bargain-front.vercel.app/",
+        gitHub: "https://github.com/Youngson335/bargain-front",
       },
     ],
   }),
