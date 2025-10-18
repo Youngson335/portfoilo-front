@@ -3,7 +3,7 @@
 
 :root {
     --shadow: 0 10px 20px 0 #0000001F;
-    --radius: 20px;
+    --radius: 15px;
 }
 
 * {
