@@ -17,6 +17,7 @@ import VueMain from "@/components/Main/VueMain.vue";
 import VueFooter from "@/components/Footer/VueFooter.vue";
 import { ref } from "vue";
 import { useRoute } from "vue-router";
+import postCountVisit from "@/requests/post/postCountVisits";
 
 const route = useRoute();
 const hasQueryId = ref(false);
@@ -30,6 +31,8 @@ const onSelectedContentType = (contentName: ContentName) => {
 if (route.query.work_id) {
   content_name.value = ContentName.PORTFOLIO;
 }
+
+postCountVisit();
 </script>
 <style lang="scss">
 .home-page {
