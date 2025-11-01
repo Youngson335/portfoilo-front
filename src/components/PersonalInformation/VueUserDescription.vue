@@ -21,7 +21,10 @@
       </div>
       <div class="user-info mb-10">
         <vue-label> Дата рождения </vue-label>
-        <p>15.06.2005 (19лет)</p>
+        <p>15.06.2005 (20лет)</p>
+      </div>
+      <div class="user-info mb-10">
+        <p style="text-decoration: underline">Женат</p>
       </div>
     </div>
 
