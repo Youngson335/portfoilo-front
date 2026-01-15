@@ -161,6 +161,12 @@ const usePortfolioStore = defineStore("portfolio", {
         title: "Лендинг для торгов",
         countImage: 3,
       },
+      {
+        id: 23,
+        img: require("../assets/portfolio/work23/1.png"),
+        title: "Сервис для грузчиков",
+        countImage: 12,
+      },
     ],
 
     completeWorks: [
@@ -956,6 +962,64 @@ const usePortfolioStore = defineStore("portfolio", {
         description: "Разработал лендинг для торгов (без адаптива!)",
         link: "https://bargain-front.vercel.app/",
         gitHub: "https://github.com/Youngson335/bargain-front",
+      },
+      {
+        id: 23,
+        images: [
+          {
+            id: 1,
+            img: require("../assets/portfolio/work23/1.png"),
+          },
+          {
+            id: 2,
+            img: require("../assets/portfolio/work23/2.png"),
+          },
+          {
+            id: 3,
+            img: require("../assets/portfolio/work23/3.png"),
+          },
+          {
+            id: 4,
+            img: require("../assets/portfolio/work23/4.png"),
+          },
+          {
+            id: 5,
+            img: require("../assets/portfolio/work23/5.png"),
+          },
+          {
+            id: 6,
+            img: require("../assets/portfolio/work23/6.png"),
+          },
+          {
+            id: 7,
+            img: require("../assets/portfolio/work23/7.png"),
+          },
+          {
+            id: 8,
+            img: require("../assets/portfolio/work23/8.png"),
+          },
+          {
+            id: 9,
+            img: require("../assets/portfolio/work23/9.png"),
+          },
+          {
+            id: 10,
+            img: require("../assets/portfolio/work23/10.png"),
+          },
+          {
+            id: 11,
+            img: require("../assets/portfolio/work23/11.png"),
+          },
+          {
+            id: 12,
+            img: require("../assets/portfolio/work23/12.png"),
+          },
+        ],
+        title: "Сервис для грузчиков",
+        description:
+          "Полноценная разработка сервиса. Связка frontend с backend. Задача - реализовать удобную связь между заказчиком и грузчиком!",
+        link: null,
+        gitHub: null,
       },
     ],
   }),
